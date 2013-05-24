@@ -1,3 +1,3 @@
-cvsparser
+csvparser
 =========
-Parse CVS string.
+Parse CSV string.
