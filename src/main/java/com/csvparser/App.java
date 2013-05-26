@@ -8,6 +8,8 @@ public class App
 {
 	public static void main( String[] args )
 	{
-		System.out.println( "Hello World!" );
+		String csvString = "\"ddd ddd ddd \",22,3,a3,\"ac, abs, as\",1000.00\n";
+		CSV csv = new CSV(',');
+		csv.parse(csvString);
 	}
 }
