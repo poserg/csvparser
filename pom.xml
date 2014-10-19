@@ -24,12 +24,23 @@
   </dependencies>
   
   <build>
-  <directory>${project.basedir}/target</directory>
+    <directory>${project.basedir}/target</directory>
     <outputDirectory>${project.build.directory}/classes</outputDirectory>
     <finalName>${project.artifactId}-${project.version}</finalName>
     <testOutputDirectory>${project.build.directory}/test-classes</testOutputDirectory>
     <sourceDirectory>${project.basedir}/src/main/java</sourceDirectory>
     <scriptSourceDirectory>src/main/scripts</scriptSourceDirectory>
     <testSourceDirectory>${project.basedir}/src/test/java</testSourceDirectory>
+    <plugins>
+      <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-compiler-plugin</artifactId>
+          <version>3.1</version>
+          <configuration>
+            <source>1.5</source>
+            <target>1.5</target>
+          </configuration>
+        </plugin>
+    </plugins>
   </build>
 </project>
