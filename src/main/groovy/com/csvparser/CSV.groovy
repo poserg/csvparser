@@ -11,7 +11,7 @@ import java.util.regex.Pattern;
  */
 public class CSV {
 
-	private static final String LINE_DELIMITER = "[\r?\n|\r]+";
+	private static final String LINE_DELIMITER = '[\r?\n|\r]+';
 	private final char delimiter;
 	private final Pattern pattern;
 
@@ -27,7 +27,7 @@ public class CSV {
 	 */
 	private Pattern getPattern(char delimiter) {
 		// "(?<=(\"|^\"))([^\"]*)(?=\",|\"$)|(?<=,|^)([^,\"]*)(?=,|$)"
-		return Pattern.compile(String.format("(?<=(\"|^\"))([^\"]*)(?=\"%s|\"$)|(?<=%s|^)([^%s\"]*)(?=%s|$)", delimiter, delimiter, delimiter, delimiter));
+		return Pattern.compile(String.format('(?<=(\"|^\"))([^\"]*)(?=\"%s|\"$)|(?<=%s|^)([^%s\"]*)(?=%s|$)', delimiter, delimiter, delimiter, delimiter));
 	}
 
 	public List<ArrayList<String>> parse(String csv) {
