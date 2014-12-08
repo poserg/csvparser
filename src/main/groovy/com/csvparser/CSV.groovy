@@ -1,5 +1,3 @@
-package com.csvparser;
-
 /**
  * @author Sergey Popov
  *

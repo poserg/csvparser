@@ -1,5 +1,3 @@
-package com.csvparser;
-
 import groovy.util.GroovyTestCase
 
 /**
