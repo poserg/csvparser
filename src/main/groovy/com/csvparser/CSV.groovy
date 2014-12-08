@@ -1,50 +1,39 @@
 package com.csvparser;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
 /**
  * @author Sergey Popov
  *
  */
-public class CSV {
+class CSV {
 
-	private static final String LINE_DELIMITER = '[\r?\n|\r]+';
-	private final char delimiter;
-	private final Pattern pattern;
+	def private static final String LINE_DELIMITER = '[\r?\n|\r]+'
+	def private pattern
 
-	public CSV(char delimiter) {
-		this.delimiter = delimiter;
-
-		pattern = getPattern(delimiter);
+	CSV(String delimiter) {
+		pattern = /(?<=(\"|^\"))([^\"]*)(?=\"$delimiter|\"$)|(?<=$delimiter|^)([^$delimiter\"]*)(?=$delimiter|$)/
 	}
 
-	/**
-	 * @param delimiter
-	 * @return
-	 */
-	private Pattern getPattern(char delimiter) {
-		// "(?<=(\"|^\"))([^\"]*)(?=\",|\"$)|(?<=,|^)([^,\"]*)(?=,|$)"
-		return Pattern.compile(String.format('(?<=(\"|^\"))([^\"]*)(?=\"%s|\"$)|(?<=%s|^)([^%s\"]*)(?=%s|$)', delimiter, delimiter, delimiter, delimiter));
-	}
-
-	public List<ArrayList<String>> parse(String csv) {
-		String[] lines = csv.split(LINE_DELIMITER);
-		List<ArrayList<String>> result = new ArrayList<ArrayList<String>>();
-
-		for (String line : lines) {
-			ArrayList<String> l = new ArrayList<String>();
-			Matcher matcher = pattern.matcher(line);
-			while (matcher.find()) {
-				String match = matcher.group(0);
-				if (match != null) {
-					l.add(match);
-				}
+	def parse(String csv) {
+		def lines = csv.split(LINE_DELIMITER)
+		def result = []
+		for (String i : lines) {
+			def matcher = i =~ pattern
+			def l = []
+			if (matcher.find()) {
+				for (int k = 0; k < matcher.getCount(); k++)
+					l << matcher[k][0]
 			}
-			result.add(l);
+			result << l
 		}
-		return result;
+		return result	
+	}
+
+	def match(line) {
+		def matcher = line =~ pattern
+		if (matcher.find()) {
+			return matcher.each({it[0]})
+		} else {
+			return null;
+		}
 	}
 }

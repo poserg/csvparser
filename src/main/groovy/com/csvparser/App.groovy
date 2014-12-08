@@ -1,12 +1,11 @@
 package com.csvparser;
-//import CSV;
 
-public class App
+class App
 {
 	public static void main( String[] args )
 	{
-		String csvString = "\"ddd ddd ddd \",22,3,a3,\"ac, abs, as\",1000.00\n";
-		CSV csv = new CSV(',');
-		csv.parse(csvString);
+		def csvString = "\"ddd ddd ddd \",22,3,a3,\"ac, abs, as\",1000.00\n"
+		def csv = new CSV(",")
+		csv.parse(csvString)
 	}
 }
