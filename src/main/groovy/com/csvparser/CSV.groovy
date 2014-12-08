@@ -27,13 +27,4 @@ class CSV {
 		}
 		return result	
 	}
-
-	def match(line) {
-		def matcher = line =~ pattern
-		if (matcher.find()) {
-			return matcher.each({it[0]})
-		} else {
-			return null;
-		}
-	}
 }
